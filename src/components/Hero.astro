@@ -1,0 +1,28 @@
+<div class="flex justify-center">
+  <div class="font-pixel text-white my-20">
+    <span class="text-2xl text-left block">Hi!</span>
+    <span class="text-3xl blinking-cursor block">I'm <span class="text-secondary">Gioele Pannetto</span></span>
+    <span class="text-xs block text-center">FULLSTACK DEVELOPER</span>
+  </div>
+</div>
+<style>
+  .blinking-cursor::after {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 3px;
+    background-color: #fff;
+    animation: blinking-cursor-anim 1s step-end infinite;
+    -webkit-animation: blinking-cursor-anim 1s step-end infinite;
+  }
+  @keyframes blinking-cursor-anim {
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0;
+    }
+  }
+</style>
