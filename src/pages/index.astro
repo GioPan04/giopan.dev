@@ -1,6 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
+import { differenceInYears } from 'date-fns';
+
+const birth = new Date(2004, 11, 30);	// 30/12/2004
+const age = differenceInYears(Date.now(), birth);
 ---
 
 <Layout title="Home">
@@ -12,7 +16,7 @@ import Hero from '../components/Hero.astro';
 			<div class="grid gap-8 sm:grid-cols-3 justify-center items-center mt-8">
 				<img class="mx-auto w-48 sm:w-72 rounded-full" src="/me.jpg" alt="My profile picture"/>
 				<p class="sm:col-span-2 text-justify">
-					Hi! I'm Gioele Pannetto, a 19 years old programming enthusiast boy.
+					Hi! I'm Gioele Pannetto, a { age } years old programming enthusiast boy.
 					I have this passion since I was 3 years old, when my father gifted me my first computer.
 					When I was 7 I developed my first Visual Basic script.
 					At the age of 10 I created my first website in HTML and CSS, and so on with other programming languages not only for the web.
