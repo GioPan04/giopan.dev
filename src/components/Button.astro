@@ -1,3 +1,9 @@
-<button class="bg-accent px-4 py-3 rounded shadow text-sm font-bold uppercase">
+---
+interface Props {
+  class?: string;
+}
+---
+
+<button class:list={["bg-accent px-4 py-3 rounded shadow text-sm font-bold uppercase", Astro.props.class]}>
   <slot />
 </button>

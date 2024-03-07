@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import { Mail } from 'lucide-react';
+---
+
+<Layout title="Web Development">
+  <div class="my-32 flex flex-col items-center">
+    <h1 class="font-pixel text-4xl text-center">Beautifully crafted, <br/> <span data-hero-keyword class="text-secondary transition-all">handmade</span> websites</h1>
+    <a href="mailto:gioele@pannetto.com">
+      <Button class="mt-8 items-center flex space-x-2"><Mail/><span>Contact Me</span></Button>
+    </a>
+  </div>
+
+
+</Layout>
+
+<script>
+const span = document.querySelector<HTMLSpanElement>('[data-hero-keyword]')!;
+const words = ['handmade', 'lightweight', 'inexpensive'];
+let current = 0;
+  
+const update = () => {
+  current = (current + 1) % words.length;
+  span.innerText = words[current];
+};
+
+setInterval(update, 5000);
+</script>
