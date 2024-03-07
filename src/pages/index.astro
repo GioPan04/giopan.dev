@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import TimeLine, { type IEvents } from '../components/TimeLine.astro';
+import Section from '../components/Section.astro';
 import { differenceInYears } from 'date-fns';
 
 const birth = new Date(2004, 11, 30);	// 30/12/2004
@@ -18,9 +19,8 @@ const events: IEvents = {
 	<main class="container mx-auto px-4">
 		<Hero />
 		
-		<section class="mt-48">
-			<h3 class="font-pixel text-2xl">whoami</h3>
-			<div class="grid gap-8 sm:grid-cols-3 justify-center items-center mt-8">
+		<Section class="mt-48" title="whoami">
+			<div class="grid gap-8 sm:grid-cols-3 justify-center items-center">
 				<img class="mx-auto w-48 sm:w-72 rounded-full" src="/me.jpg" alt="My profile picture"/>
 				<p class="sm:col-span-2 text-justify">
 					Hi! I'm Gioele Pannetto, a { age } years old programming enthusiast boy.
@@ -31,11 +31,10 @@ const events: IEvents = {
 					I hope to help you as well! 
 				</p>
 			</div>
-		</section>
+		</Section>
 
-		<section>
-			<h3 class="font-pixel text-2xl mt-16 mb-4">My timeline</h3>
+		<Section title="My timeline">
 			<TimeLine events={events} />
-		</section>
+		</Section>
 	</main>
 </Layout>
