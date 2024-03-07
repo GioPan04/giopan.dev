@@ -1,0 +1,42 @@
+---
+const pages: {name: string, url: string}[] = [
+  {
+    name: 'Home',
+    url: '/'
+  },
+  {
+    name: 'Blog',
+    url: '/blog'
+  },
+  {
+    name: 'Web Development',
+    url: '/web-development'
+  }
+]
+---
+
+<nav class="bg-accent/70 text-white py-2">
+  <div class="mx-auto w-max flex items-center">
+    <span class="text-3xl -mt-1 text-white/50">{'{'}</span>
+    {pages.map((p, i) => 
+      <a href={p.url}>
+        <span class:list={["page-link", {'page-link-last': i == (pages.length - 1)}]}>{p.name}</span>
+      </a>
+    )}
+    <span class="text-3xl ml-4 -mt-1 text-white/50">{'}'}</span>
+  </div>
+</nav>
+<style>
+.page-link {
+  margin-left: 1rem;
+}
+.page-link::before {
+  content: '"';
+}
+.page-link::after {
+  content: '", ';
+}
+.page-link-last::after {
+  content: '"';
+}
+</style>
