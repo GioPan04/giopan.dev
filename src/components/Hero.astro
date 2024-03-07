@@ -1,8 +1,31 @@
-<div class="flex justify-center">
-  <div class="font-pixel text-white my-20">
+---
+import { SiGithub, SiCodepen, SiX, SiInstagram } from '@icons-pack/react-simple-icons';
+import { Mail } from 'lucide-react';
+import SocialButton from './SocialButton.astro';
+---
+
+<div class="flex items-center text-white flex-col">
+  <div class="font-pixel my-20">
     <span class="text-center text-2xl sm:text-left block">Hi!</span>
     <span class="text-center text-3xl blinking-cursor block">I'm <br class="sm:hidden"/> <span class="text-secondary">Gioele Pannetto</span></span>
-    <span class="text-xs block text-center">FULLSTACK DEVELOPER</span>
+    <span class="text-xs block text-center mt-2">FULLSTACK DEVELOPER</span>
+  </div>
+  <div class="flex flex-wrap justify-center space-x-2">
+    <SocialButton href="https://github.com/GioPan04">
+      <SiGithub />
+    </SocialButton>
+    <SocialButton href="mailto:gioele@pannetto.com">
+      <Mail />
+    </SocialButton>
+    <SocialButton href="https://codepen.io/GioPan">
+      <SiCodepen />
+    </SocialButton>
+    <SocialButton href="https://x.com/giopan_sh">
+      <SiX />
+    </SocialButton>
+    <SocialButton href="https://instagram.com/giopan.dev">
+      <SiInstagram />
+    </SocialButton>
   </div>
 </div>
 <style>
