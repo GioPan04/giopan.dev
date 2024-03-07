@@ -1,7 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
-import { Mail } from 'lucide-react';
+import { Mail, Hand, PencilRuler, Shapes } from 'lucide-react';
+import { Image } from 'astro:assets';
+import Feature from '../components/Feature.astro';
+import Section from '../components/Section.astro';
+import lacolonna from '../images/works/lacolonna.png';
+import angelogueli from '../images/works/angelogueli.png';
 ---
 
 <Layout title="Web Development">
@@ -12,7 +17,47 @@ import { Mail } from 'lucide-react';
     </a>
   </div>
 
+  <main class="container mx-auto px-4">
 
+    <Section title="Features">
+      <div class="grid sm:grid-cols-3 xl:grid-cols-5 gap-5">
+        <div class="hidden xl:block"></div>
+        <Feature icon={Hand}>
+          All my websites are made from scratch using lightweight tools, unlike WordPress, so your website will be <b class="font-bold">lightning fast</b>!
+        </Feature>
+        <Feature icon={PencilRuler}>
+          Easly <b class="font-bold">customizable</b>, edit the website settings from a simple dashboard compleatly designed in house
+        </Feature>
+        <Feature icon={Shapes}>
+          Shaped on your needs. From a personal to a business website. Need a specific feature? I've got you covered.
+        </Feature>
+        <div class="hidden xl:block"></div>
+      </div>
+    </Section>
+
+    <Section title="Past work">
+      <div class="grid lg:grid-cols-2 gap-4">
+        <div>
+          <span class="font-mono text-xl block mb-4">lacolonnacar.it</span>
+          <p>
+            Autocarrozzeria La Colonna is a car services and shop.
+            Their website shows all their services and contact info.
+            It also includes a payment service, powered by Stripe, that allows clients to book a car for rental.
+          </p>
+        </div>
+        <Image class="rounded" src={lacolonna} alt="Autocarrozzeria La Colonna website screenshot"/>
+        
+        <div>
+          <span class="font-mono text-xl block mb-4">angelogueli.com</span>
+          <p>
+            Angelo Gueli is an artist
+          </p>
+        </div>
+        <Image class="rounded" src={angelogueli} alt="Autocarrozzeria La Colonna website screenshot"/>
+      </div>
+    </Section>
+
+  </main>
 </Layout>
 
 <script>
