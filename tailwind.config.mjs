@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        base: ['"Comfortaa"', 'sans-serif'],
         pixel: ['"Press Start 2P"', "system-ui"],
       },
       colors: {
