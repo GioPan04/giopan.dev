@@ -1,10 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
+import TimeLine, { type IEvents } from '../components/TimeLine.astro';
 import { differenceInYears } from 'date-fns';
 
 const birth = new Date(2004, 11, 30);	// 30/12/2004
 const age = differenceInYears(Date.now(), birth);
+
+const events: IEvents = {
+	2018: ['Started studying IT at I.S.I.S. P. Gobetti - A. Volta. A high school in Florence, Italy.'],
+	2020: ['Started working for Insegreto, an Italian social network where you can share secrets anonymously. I worked as fullstack developer, we updated the website and we began to work on the app.'],
+	2023: ['Graduated in high school with a score of 81/100']
+}
 ---
 
 <Layout title="Home">
@@ -24,6 +31,11 @@ const age = differenceInYears(Date.now(), birth);
 					I hope to help you as well! 
 				</p>
 			</div>
+		</section>
+
+		<section>
+			<h3 class="font-pixel text-2xl mt-16 mb-4">My timeline</h3>
+			<TimeLine events={events} />
 		</section>
 	</main>
 </Layout>

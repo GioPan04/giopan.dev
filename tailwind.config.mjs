@@ -12,6 +12,9 @@ export default {
         secondary: "#E03616",
         accent: "#008148",
       },
+      gridTemplateColumns: {
+        timeline: '1fr 200px 1fr'
+      }
     },
   },
   plugins: [],

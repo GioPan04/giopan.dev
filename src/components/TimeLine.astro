@@ -1,0 +1,55 @@
+---
+import { Divide } from 'lucide-react';
+
+export interface IEvents {
+  [year: number]: string[]
+} 
+
+interface Props {
+  events: IEvents
+}
+
+const events = Object.entries(Astro.props.events);
+---
+
+<div class="hidden md:grid grid-cols-timeline">
+  {
+    events.map(function (e, i) {
+      const last = i == (events.length - 1);
+      const [ year, event ]: [string, string[]] = e;
+
+      const contents = (
+        <div class:list={{"pb-16": !last}}>
+        { event.map(e => <p class="text-justify">{e}</p>) }
+        </div>
+      )
+
+      return (
+        <div>{(i % 2) == 0 && contents}</div>
+        <div class="flex flex-col items-center">
+          <div class="bg-white text-black font-bold rounded-full w-16 h-16 text-lg px-3 py-[1.125rem]">
+            {year}
+          </div>
+          <div class="w-0.5 h-full bg-white block"></div>
+        </div>
+        <div>{(i % 2) != 0 && contents}</div>
+      );
+    })
+  }
+</div>
+<div class="md:hidden">
+{
+  events.map((e, i) => (
+    <div class:list={{"mt-8": i != 0}}>
+      <div class="mx-auto mb-2 bg-white text-black font-bold rounded-full w-16 h-16 text-lg px-3 py-[1.125rem]">
+        {e[0]}
+      </div>
+      {
+        e[1].map((content: string) => (
+          <p class="text-justify">{content}</p>
+        ))
+      }
+    </div>
+  ))
+}
+</div>
