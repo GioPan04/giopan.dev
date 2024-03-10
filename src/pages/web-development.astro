@@ -1,17 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
-import { Mail, Hand, PencilRuler, Shapes } from 'lucide-react';
+import { Mail, Hand, PencilRuler, Shapes, Zap } from 'lucide-react';
 import { Image } from 'astro:assets';
 import Feature from '../components/Feature.astro';
 import Section from '../components/Section.astro';
 import lacolonna from '../images/works/lacolonna.png';
 import angelogueli from '../images/works/angelogueli.png';
+import Website from '../components/Website.astro';
 ---
 
 <Layout title="Web Development">
   <div class="my-32 flex flex-col items-center">
-    <h1 class="font-pixel text-4xl text-center">Beautifully crafted, <br/> <span data-hero-keyword class="text-secondary transition-all">handmade</span> websites</h1>
+    <h1 class="font-pixel text-3xl lg:text-4xl text-center">Beautifully crafted, <br/> <span data-hero-keyword class="text-secondary">handmade</span> websites</h1>
     <a href="mailto:gioele@pannetto.com">
       <Button class="mt-8 items-center flex space-x-2"><Mail/><span>Contact Me</span></Button>
     </a>
@@ -22,7 +23,7 @@ import angelogueli from '../images/works/angelogueli.png';
     <Section title="Features">
       <div class="grid sm:grid-cols-3 xl:grid-cols-5 gap-5">
         <div class="hidden xl:block"></div>
-        <Feature icon={Hand}>
+        <Feature icon={Zap}>
           All my websites are made from scratch using lightweight tools, unlike WordPress, so your website will be <b class="font-bold">lightning fast</b>!
         </Feature>
         <Feature icon={PencilRuler}>
@@ -37,26 +38,17 @@ import angelogueli from '../images/works/angelogueli.png';
 
     <Section title="Past work">
       <div class="grid lg:grid-cols-2 gap-4">
-        <div>
-          <span class="font-mono text-xl block mb-4">lacolonnacar.it</span>
-          <p>
-            Autocarrozzeria La Colonna is a car services and shop.
-            Their website shows all their services and contact info.
-            It also includes a payment service, powered by Stripe, that allows clients to book a car for rental.
-          </p>
-        </div>
-        <Image class="rounded" src={lacolonna} alt="Autocarrozzeria La Colonna website screenshot"/>
-        
-        <div>
-          <span class="font-mono text-xl block mb-4">angelogueli.com</span>
-          <p>
-            Angelo Gueli is an artist
-          </p>
-        </div>
-        <Image class="rounded" src={angelogueli} alt="Autocarrozzeria La Colonna website screenshot"/>
+        <Website url="lacolonnacar.it" img={lacolonna}>
+          Autocarrozzeria La Colonna is a car services and shop.
+          Their website shows all their services and contact info.
+          It also includes a payment service, powered by Stripe, that allows clients to book a car for rental.
+        </Website>
+        <Website url="angelogueli.com" img={angelogueli}>
+          Angelo Gueli is an architect who has a passion for drawing. He needed a website where he could show the world
+          his drawings. Given the dynamicity of his works, every page is compleatly customizable using a simple text editor accessible from the dashboard. 
+        </Website>
       </div>
-    </Section>
-
+    </Section>  
   </main>
 </Layout>
 

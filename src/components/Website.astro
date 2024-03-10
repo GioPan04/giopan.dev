@@ -1,0 +1,29 @@
+---
+import { Image } from 'astro:assets';
+import { ExternalLink } from 'lucide-react';
+
+interface Props {
+  url: string;
+  desc?: string;
+  img: ImageMetadata;
+}
+
+const { url, desc, img } = Astro.props;
+const href = `https://${url}`;
+---
+
+<div>
+  <a href={href} class="font-mono text-xl block mb-4">{url}</a>
+  <p>
+    { desc || (<slot />) }
+  </p>
+</div>
+<a href={href} target="_blank">
+  <div class="relative">
+    <div class="absolute opacity-0 inset-0 bg-black/50 flex flex-col space-y-2 items-center justify-center hover:opacity-100 transition-opacity">
+      <ExternalLink className="w-12 h-12"/>
+      <span>{url}</span>
+    </div>
+    <Image class="rounded" src={img} alt={`${url} screenshot`}/>
+  </div>
+</a>
