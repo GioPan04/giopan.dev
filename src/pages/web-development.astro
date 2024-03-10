@@ -13,8 +13,8 @@ import Website from '../components/Website.astro';
 <Layout title="Web Development">
   <div class="my-32 flex flex-col items-center">
     <h1 class="font-pixel text-3xl lg:text-4xl text-center">Beautifully crafted, <br/> <span data-hero-keyword class="text-secondary">handmade</span> websites</h1>
-    <a href="mailto:gioele@pannetto.com">
-      <Button class="mt-8 items-center flex space-x-2"><Mail/><span>Contact Me</span></Button>
+    <a class="mt-8" href="mailto:gioele@pannetto.com">
+      <Button class="items-center flex space-x-2"><Mail/><span>Contact Me</span></Button>
     </a>
   </div>
 
@@ -50,6 +50,19 @@ import Website from '../components/Website.astro';
       </div>
     </Section>  
   </main>
+
+  <div class="bg-accent py-10">
+    <div class="container mx-auto px-4 flex flex-col items-center">
+      <h3 class="font-pixel text-3xl text-center">Ready to get yours?</h3>
+      <p class="text-center my-5">
+        I belive that every website should reflect as much as possible your personality / the aspects of your company, <br/>
+        so what are you waiting for? Contact Me now!
+      </p>
+      <a href="mailto:gioele@pannetto.com">
+        <Button class="items-center flex space-x-2 bg-secondary"><Mail/><span>Contact Me</span></Button>
+      </a>
+    </div>
+  </div>
 </Layout>
 
 <script>
