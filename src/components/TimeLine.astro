@@ -17,7 +17,7 @@ const events = Object.entries(Astro.props.events);
       const [ year, event ]: [string, string[]] = e;
 
       const contents = (
-        <div class:list={{"pb-16": !last}}>
+        <div class:list={{'timeline-event': true, "pb-16": !last}}>
         { event.map(e => <p>{e}</p>) }
         </div>
       )
@@ -51,3 +51,39 @@ const events = Object.entries(Astro.props.events);
   ))
 }
 </div>
+
+<style>
+  .timeline-hidden {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  .timeline-shown {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+
+    opacity: 1;
+    transform: translateY(0px);
+  }
+</style>
+
+<script>
+  
+  const observerCallback: IntersectionObserverCallback = (entries, observer) => {
+    entries.forEach((oe) => {
+      if(!oe.target.classList.contains('timeline-shown') && oe.isIntersecting) {
+        oe.target.classList.add('timeline-shown');
+        observer.unobserve(oe.target);
+      }
+    });
+    
+  }
+  
+  const events = document.querySelectorAll<HTMLSpanElement>('.timeline-event');
+  const observer = new IntersectionObserver(observerCallback, { rootMargin: '100px 0px 0px 0px' });
+
+  events.forEach((e) => {
+    e.classList.add('timeline-hidden');
+    observer.observe(e);
+  });
+</script>
