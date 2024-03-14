@@ -35,9 +35,9 @@ const url = Astro.url;
 		<main class="container mx-auto px-6 lg:px-12">
       <h1 class="mt-12 text-2xl sm:text-4xl font-pixel text-center">{ frontmatter.title }</h1>
       <span class="text-center block text-sm text-white/80">Published on {format(frontmatter.pubDate, 'dd/MM/yyyy')}</span>
-      <div class="mt-8 text-justify md:text-left prose-base prose-invert prose-headings:font-pixel prose-img:xl:max-w-5xl prose-img:mx-auto prose-a:underline prose-pre:p-4">
+      <article class="mt-8 text-justify md:text-left prose-base prose-invert prose-headings:font-pixel prose-img:xl:max-w-5xl prose-img:mx-auto prose-a:underline prose-pre:p-4">
         <slot />
-      </div>
+      </article>
 		</main>
 		<slot name="after-main"/>
 	</body>
