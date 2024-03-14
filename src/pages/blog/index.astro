@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import type IPost from '../../types/post.ts';
+const posts = await Astro.glob<IPost>('./posts/*.md');
+---
+
+<Layout title="Blog">
+  <div>
+    { posts.map((p) => (
+      <a href={p.url}>
+        <article>
+          <h3 class="text-2xl">{ p.frontmatter.title }</h3>
+          <p>{ p.frontmatter.description }</p>
+        </article>
+      </a>
+    )) }
+  </div>
+</Layout>
