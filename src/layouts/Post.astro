@@ -1,0 +1,44 @@
+---
+import { format } from 'date-fns';
+import NavBar from '../components/NavBar.astro';
+
+const { frontmatter } = Astro.props;
+const url = Astro.url;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Gioele Pannetto website" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Press+Start+2P&display=swap" rel="stylesheet">
+		<title>{frontmatter.title} - giopan.dev</title>
+    
+    <meta property="og:title" content={ frontmatter.title } />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={url} />
+    <meta property="og:description" content={ frontmatter.description } />
+    <meta name="description" content={ frontmatter.description } />
+    <meta property="og:site_name" content="giopan.dev" />
+    <meta property="article:published_time" content={ frontmatter.pubDate } />
+    <meta property="article:modified_time" content={ frontmatter.pubDate } />
+    <meta name="twitter:creator" content="@giopan_sh" />
+    <meta name="twitter:card" content="summary" />
+	</head>
+	<body class="antialiased bg-primary font-base text-white pt-12">
+		<NavBar />
+		<main class="container mx-auto px-6 lg:px-12">
+      <h1 class="mt-12 text-2xl sm:text-4xl font-pixel text-center">{ frontmatter.title }</h1>
+      <span class="text-center block text-sm text-white/80">Published on {format(frontmatter.pubDate, 'dd/MM/yyyy')}</span>
+      <div class="mt-8 text-justify md:text-left prose-base prose-invert prose-headings:font-pixel prose-img:xl:max-w-5xl prose-img:mx-auto prose-a:underline prose-pre:p-4">
+        <slot />
+      </div>
+		</main>
+		<slot name="after-main"/>
+	</body>
+</html>
