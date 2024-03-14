@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import TimeLine, { type IEvents } from '../../components/TimeLine.astro';
+import Section from '../../components/Section.astro';
+import { differenceInYears } from 'date-fns';
+
+const birth = new Date(2004, 11, 30);	// 30/12/2004
+const age = differenceInYears(Date.now(), birth);
+
+const events: IEvents = {
+	2018: ['Started studying IT at I.S.I.S. P. Gobetti - A. Volta. A high school in Florence, Italy.'],
+	2020: ['Started working for Insegreto, an Italian social network where you can share secrets anonymously. I worked as fullstack developer, we updated the website and we began to work on the app.'],
+	2023: ['Graduated in high school with a score of 81/100'],
+	2024: ['Started studying Computer Science at University of Florence']
+}
+---
+
+<Layout title="Home">
+	<main class="container mx-auto px-4">
+		<Hero />
+		
+		<Section class="mt-48" title="whoami">
+			<div class="grid gap-8 sm:grid-cols-3 justify-center items-center">
+				<img class="mx-auto w-48 sm:w-72 rounded-full" src="/me.jpg" alt="My profile picture"/>
+				<p class="sm:col-span-2 text-justify">
+					Ciao! sono Gioele Pannetto, un ragazzo appassionato di programmazione di { age } anni.
+					I have this passion since I was 3 years old, when my father gifted me my first computer.
+					When I was 7 I developed my first Visual Basic script.
+					At the age of 10 I created my first website in HTML and CSS, and so on with other programming languages not only for the web.
+					I also created some websites for relatives and friends, and with this I realized that in addition to the passion for IT, I also have the passion for helping others.
+					I hope to help you as well! 
+				</p>
+			</div>
+		</Section>
+
+		<Section title="My timeline">
+			<TimeLine events={events} />
+		</Section>
+	</main>
+</Layout>
