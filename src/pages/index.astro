@@ -17,25 +17,23 @@ const events: IEvents = {
 ---
 
 <Layout title="Home">
-	<main class="container mx-auto px-6 lg:px-12">
-		<Hero />
-		
-		<Section class="mt-32" title="whoami">
-			<div class="flex flex-col space-y-4 sm:flex-row sm:space-x-8 sm:space-y-0 justify-center items-center">
-				<img class="w-48 h-48 sm:w-72 sm:h-72 rounded-full" src="/me.jpg" alt="My profile picture"/>
-				<p class="sm:col-span-2 text-justify">
-					Hi! I'm Gioele Pannetto, a { age } years old programming enthusiast boy.
-					I have this passion since I was 3 years old, when my father gifted me my first computer.
-					When I was 7 I developed my first Visual Basic script.
-					At the age of 10 I created my first website in HTML and CSS, and so on with other programming languages not only for the web.
-					I also created some websites for relatives and friends, and with this I realized that in addition to the passion for IT, I also have the passion for helping others.
-					I hope to help you as well! 
-				</p>
-			</div>
-		</Section>
+	<Hero />
+	
+	<Section class="mt-32" title="whoami">
+		<div class="flex flex-col space-y-4 sm:flex-row sm:space-x-8 sm:space-y-0 justify-center items-center">
+			<img class="w-48 h-48 sm:w-72 sm:h-72 rounded-full" src="/me.jpg" alt="My profile picture"/>
+			<p class="sm:col-span-2 text-justify">
+				Hi! I'm Gioele Pannetto, a { age } years old programming enthusiast boy.
+				I have this passion since I was 3 years old, when my father gifted me my first computer.
+				When I was 7 I developed my first Visual Basic script.
+				At the age of 10 I created my first website in HTML and CSS, and so on with other programming languages not only for the web.
+				I also created some websites for relatives and friends, and with this I realized that in addition to the passion for IT, I also have the passion for helping others.
+				I hope to help you as well! 
+			</p>
+		</div>
+	</Section>
 
-		<Section title="My timeline">
-			<TimeLine events={events} />
-		</Section>
-	</main>
+	<Section title="My timeline">
+		<TimeLine events={events} />
+	</Section>
 </Layout>
