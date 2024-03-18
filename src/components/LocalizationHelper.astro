@@ -1,0 +1,123 @@
+---
+import { X } from 'lucide-react';
+import Button from './Button.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const siteLanguage = Astro.currentLocale ?? 'en';
+
+
+const translations = {
+  it: {
+    title: "🇮🇹 Ciao!",
+    body: "Sembra che tu stia visualizzando il sito in Inglese, ma il tuo browser è impostato in Italiano. Vuoi cambiare la lingua del sito in Italiano?",
+    confirm_btn: "Cambia in Italiano",
+
+  },
+  en: {
+    title: "Hi!",
+    body: "It looks like you are viewing the Italian version of the website, but your prefered language is English. Do you wish to go to the English version of the website?",
+    config_btn: "Change to English",
+  }
+}
+
+---
+
+<lang-box
+  data-translations={JSON.stringify(translations)}
+  data-site-lang={siteLanguage}
+  data-redirect-url={getRelativeLocaleUrl('en')}
+  >
+  <div class="relative">
+    <button class="lang-box-dismiss-btn absolute right-0"><X /></button>
+    <span class="lang-box-title text-2xl mb-2 block">🇮🇹 Ciao!</span>
+    <p class="lang-box-body text-justify">Sembra che tu stia visualizzando il sito in {}, ma il tuo browser è impostato in Italiano. Vuoi cambiare la lingua del sito in Italiano?</p>
+    <div class="flex justify-end mt-2 space-x-2">
+      <Button class='lang-box-cancel-btn bg-secondary/80'>Keep in English</Button>
+      <Button class='lang-box-confirm-btn bg-secondary/80'></Button>
+    </div>
+  </div>
+</lang-box>
+
+<style>
+lang-box {
+  position: fixed;
+  bottom: 0;
+  right: 1.25rem;
+  background-color: #04623D;
+  padding: 1.25rem;
+  width: 32rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 1000ms;
+  transform: translateY(100%);
+}
+</style>
+
+<script>
+  class LangBox extends HTMLElement {
+    readonly localStorageDismissKey = 'lang-box-dismissed';
+
+    readonly siteLanguage: string;
+    readonly browserLanguage: string;
+
+    readonly confirmBtn: HTMLButtonElement;
+    readonly cancelBtn: HTMLButtonElement;
+    readonly dismissBtn: HTMLButtonElement;
+
+    readonly titleElem: HTMLElement;
+    readonly bodyElem: HTMLElement;
+    
+    constructor() {
+      super();
+      
+      this.siteLanguage = this.dataset.siteLang!.toLowerCase();
+      this.browserLanguage = navigator.language.split('-')[0].toLowerCase();
+      
+      this.confirmBtn = this.querySelector(".lang-box-confirm-btn")!;
+      this.cancelBtn = this.querySelector(".lang-box-cancel-btn")!;
+      this.dismissBtn = this.querySelector(".lang-box-dismiss-btn")!;
+      this.titleElem = this.querySelector(".lang-box-title")!;
+      this.bodyElem = this.querySelector(".lang-box-body")!;
+
+      this.confirmBtn.addEventListener('click', () => this.confirm())
+      this.cancelBtn.addEventListener('click', () => this.close());
+      this.dismissBtn.addEventListener('click', () => this.close());
+    }
+
+    confirm() {
+
+    }
+
+    close() {
+      // window.localStorage.setItem(this.localStorageDismissKey, 'true');
+    }
+  }
+
+  customElements.define('lang-box', LangBox);
+
+  const handleBox = async () => {
+    // Check if the box was previusly dismissed. We don't want to spam the user
+    const dismissed = window.localStorage.getItem("lang-box-dismissed");
+    if(dismissed == "true") return;
+
+    await new Promise((p) => setTimeout(p, 2000));
+    
+    const box = document.querySelector<HTMLElement>('[data-site-box]')!;
+      
+    const siteLanguage = box.dataset.siteLang!.toLowerCase();
+    const browserLanguage = navigator.language.split('-')[0].toLowerCase();
+    
+    if(siteLanguage != browserLanguage) {
+      box.classList.remove("hidden");
+      box.classList.add("block");
+      
+      await new Promise((p) => setTimeout(p, 1));
+  
+      box.classList.remove("translate-y-full");
+    }
+
+  };
+
+  handleBox();
+</script>
