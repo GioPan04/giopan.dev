@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import type IPost from '../../types/post.ts';
-const posts = await Astro.glob<IPost>('./posts/[!_]*.md');
+const posts = (await Astro.glob<IPost>('./posts/[!_]*.md')).reverse();
 ---
 
 <Layout title="Blog">
