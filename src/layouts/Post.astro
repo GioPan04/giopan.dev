@@ -1,8 +1,9 @@
 ---
 import { format } from 'date-fns';
 import NavBar from '../components/NavBar.astro';
+import type IPost from '../types/post';
 
-const { frontmatter } = Astro.props;
+const frontmatter: IPost = Astro.props.frontmatter;
 const url = Astro.url;
 ---
 
@@ -10,7 +11,7 @@ const url = Astro.url;
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Gioele Pannetto website" />
+		<meta name="description" content={frontmatter.description} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -19,7 +20,7 @@ const url = Astro.url;
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Press+Start+2P&display=swap" rel="stylesheet">
 		<title>{frontmatter.title} - giopan.dev</title>
-    
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <meta property="og:title" content={ frontmatter.title } />
     <meta property="og:type" content="article" />
     <meta property="og:url" content={url} />
