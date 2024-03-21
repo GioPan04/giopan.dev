@@ -1,5 +1,5 @@
 ---
-import IPost from '../../../types/post';
+import type IPost from '../../../types/post';
 import { getPostsCategories, filterPosts } from '../../../repositories/blog';
 import Layout from '../../../layouts/Layout.astro';
 import { format } from 'date-fns';
@@ -8,7 +8,7 @@ export const getStaticPaths = async () => {
   const posts = await Astro.glob<IPost>('../posts/[!_]*.md');
   const tags = getPostsCategories(posts);
 
-  return Object.entries(tags).map(([tag, n]) => {
+  return Object.entries(tags).map(([tag]) => {
     return {
       params: { tag }
     }
