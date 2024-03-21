@@ -1,18 +1,57 @@
 ---
+import { format } from 'date-fns';
 import Layout from '../../layouts/Layout.astro';
 import type IPost from '../../types/post.ts';
+import CategoryChip from '../../components/CategoryChip.astro';
+
 const posts = (await Astro.glob<IPost>('./posts/[!_]*.md')).reverse();
+const tags: {[name: string]: number} = {};
+
+posts.forEach((p) => {
+  p.frontmatter.tags.forEach((t) => {
+    if (tags[t] === undefined) {
+      tags[t] = 1;
+    } else {
+      tags[t]++;
+    }
+  });
+});
 ---
 
 <Layout title="Blog">
-  <div>
-    { posts.map((p) => (
-      <a href={p.url}>
-        <article>
-          <h3 class="text-2xl">{ p.frontmatter.title }</h3>
-          <p>{ p.frontmatter.description }</p>
-        </article>
-      </a>
-    )) }
+  <div class="mt-10 mb-16">
+    <h1 class="font-pixel text-3xl text-center mb-2">Gioele's blog</h1>
+    <span class="text-sm text-white/60 text-center block">aka: a nerd's blog</span>
+  </div>
+  <div class="lg:hidden">
+    <h3 class="font-pixel text-xl mb-3">Categories</h3>
+    <div class="flex -ml-1 overflow-x-auto">
+      { Object.entries(tags).map((t, _) => <CategoryChip>{t[0]}</CategoryChip>) }
+      { Object.entries(tags).map((t, _) => <CategoryChip>{t[0]}</CategoryChip>) }
+      { Object.entries(tags).map((t, _) => <CategoryChip>{t[0]}</CategoryChip>) }
+      { Object.entries(tags).map((t, _) => <CategoryChip>{t[0]}</CategoryChip>) }
+      { Object.entries(tags).map((t, _) => <CategoryChip>{t[0]}</CategoryChip>) }
+    </div>
+  </div>
+  <div class="mt-10 lg:grid grid-cols-3">
+    <div class="lg:col-span-2">
+      <h3 class="font-pixel text-xl mb-3">Latest posts</h3>
+      <div class="space-y-5 divide-y divide-white/10">
+        { posts.map((p) => (
+          <article class="pt-5 first:pt-0">
+            <a href={p.url}>
+              <h3 class="text-2xl mb-2">{ p.frontmatter.title } <span class="text-xs text-white/60"> - { format(p.frontmatter.pubDate, 'dd/MM/yyyy') }</span></h3>
+              <p class="text-white/80 text-sm">{ p.frontmatter.description }</p>
+            </a>
+          </article>
+        )) }
+      </div>
+    </div>
+    <div class="ml-16 hidden lg:block">
+      <h3 class="font-pixel text-xl text-right mb-3">Categories</h3>
+      <div class="flex flex-wrap justify-end -mr-1 -mt-2">
+        { Object.entries(tags).map((t, _) => <CategoryChip>{t[0]}<span class="ml-1 text-xs -translate-y-0.5 inline-block"> ({t[1]})</span></CategoryChip>) }
+      </div>
+    </div>
   </div>
 </Layout>
