@@ -1,21 +1,12 @@
 ---
-import { format } from 'date-fns';
+import { format, isAfter } from 'date-fns';
 import Layout from '../../layouts/Layout.astro';
 import type IPost from '../../types/post.ts';
 import CategoryChip from '../../components/CategoryChip.astro';
+import { getPostsCategories } from '../../repositories/blog';
 
 const posts = (await Astro.glob<IPost>('./posts/[!_]*.md')).reverse();
-const tags: {[name: string]: number} = {};
-
-posts.forEach((p) => {
-  p.frontmatter.tags.forEach((t) => {
-    if (tags[t] === undefined) {
-      tags[t] = 1;
-    } else {
-      tags[t]++;
-    }
-  });
-});
+const tags = getPostsCategories(posts);
 ---
 
 <Layout title="Blog">
@@ -26,7 +17,13 @@ posts.forEach((p) => {
   <div class="lg:hidden">
     <h3 class="font-pixel text-xl mb-3">Categories</h3>
     <div class="flex -ml-1 overflow-x-auto">
-      { Object.entries(tags).map((t, _) => <CategoryChip>{t[0]}</CategoryChip>) }
+      { Object.entries(tags).map(([t, n], _) => (
+        <a href={`/blog/tag/${t}`}>
+          <CategoryChip>
+            {t}<span class="ml-1 text-xs inline-block"> - {n}</span>
+          </CategoryChip>
+        </a>
+      )) }
     </div>
   </div>
   <div class="mt-10 lg:grid grid-cols-3">
@@ -39,6 +36,8 @@ posts.forEach((p) => {
               <h3 class="text-2xl mb-2">{ p.frontmatter.title } <span class="text-xs text-white/60"> - { format(p.frontmatter.pubDate, 'dd/MM/yyyy') }</span></h3>
               <p class="text-white/80 text-sm">{ p.frontmatter.description }</p>
             </a>
+
+            { JSON.stringify(isAfter(p.frontmatter.pubDate, new Date(2023, 0, 1))) }
           </article>
         )) }
       </div>
@@ -46,7 +45,13 @@ posts.forEach((p) => {
     <div class="ml-16 hidden lg:block">
       <h3 class="font-pixel text-xl text-right mb-3">Categories</h3>
       <div class="flex flex-wrap justify-end -mr-1 -mt-2">
-        { Object.entries(tags).map((t, _) => <CategoryChip>{t[0]}<span class="ml-1 text-xs -translate-y-0.5 inline-block"> ({t[1]})</span></CategoryChip>) }
+        { Object.entries(tags).map(([t, n], _) => (
+          <a href={`/blog/tag/${t}`}>
+            <CategoryChip>
+              {t}<span class="ml-1 text-xs inline-block"> - {n}</span>
+            </CategoryChip>
+          </a>
+        )) }
       </div>
     </div>
   </div>
