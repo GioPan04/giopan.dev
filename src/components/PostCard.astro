@@ -1,0 +1,17 @@
+---
+import { format } from 'date-fns';
+import type IPost from '../types/post'
+
+interface Props {
+  post: IPost;
+}
+
+const { post } = Astro.props;
+---
+
+<article class="break-inside-avoid-column bg-white/5 rounded p-3 blog">
+  <span class="text-lg block">{post.title}</span>
+  <span class="block text-sm mb-0.5 text-white/70">{post.tags.map(t => <span>#{t} </span>)}</span>
+  <span class="block text-xs mb-2 text-white/70">{ format(post.pubDate, 'dd/MM/yyyy') }</span>
+  <p class="text-sm">{ post.description }</p>
+</article>
