@@ -26,7 +26,7 @@ const posts = filterPosts(await Astro.glob<IPost>('../posts/[!_]*.md'), { tag })
   </div>
   <div class="mt-10">
     <div>
-      <h3 class="font-pixel text-xl mb-3 leading-loose sm:leading-normal">Latest posts tagged <span class="bg-white/5 -ml-2 pl-3 p-2 rounded">{tag}</span></h3>
+      <h3 class="font-pixel text-xl mb-3 text-center leading-loose sm:leading-normal">Latest posts tagged <span class="bg-white/5 -ml-2 pl-3 p-2 rounded">{tag}</span></h3>
       <div class="space-y-5 divide-y divide-white/10">
         { posts.map((p) => (
           <article class="pt-5 first:pt-0">
