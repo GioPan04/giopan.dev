@@ -1,9 +1,13 @@
 import type { MarkdownInstance } from 'astro';
 import type IPost from '../types/post';
-import { isAfter, isBefore } from 'date-fns';
+import { isAfter, isBefore, getYear } from 'date-fns';
 
 interface ITags {
   [name: string]: number
+}
+
+interface IYears {
+  [year: number]: number
 }
 
 type Posts = MarkdownInstance<IPost>[];
@@ -22,6 +26,21 @@ export const getPostsCategories = (posts: Posts) : ITags => {
   });
 
   return tags;
+}
+
+export const getPostsYears = (posts: Posts) : IYears => {
+  const years: IYears = {};
+
+  posts.forEach((p) => {
+    const year = getYear(p.frontmatter.pubDate);
+    if (years[year] === undefined) {
+      years[year] = 1;
+    } else {
+      years[year]++;
+    }
+  });
+
+  return years;
 }
 
 interface PostFilter {

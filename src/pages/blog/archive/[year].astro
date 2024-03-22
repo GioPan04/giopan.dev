@@ -1,0 +1,42 @@
+---
+import type IPost from '../../../types/post';
+import { getPostsYears, filterPosts } from '../../../repositories/blog';
+import Layout from '../../../layouts/Layout.astro';
+import { format } from 'date-fns';
+
+export const getStaticPaths = async () => {
+  const posts = await Astro.glob<IPost>('../posts/[!_]*.md');
+  const years = getPostsYears(posts);
+
+  return Object.entries(years).map(([year]) => {
+    return {
+      params: { year }
+    }
+  });
+};
+
+const year = parseInt(Astro.params.year);
+const posts = filterPosts(await Astro.glob<IPost>('../posts/[!_]*.md'), { date: { after: new Date(year, 0, 1), before: new Date(year + 1, 0, 1) } }).reverse();
+---
+
+<Layout title="Blog">
+  <div class="mt-10 mb-16">
+    <h1 class="font-pixel text-3xl text-center mb-2">Gioele's blog</h1>
+    <span class="text-sm text-white/60 text-center block">aka: a nerd's blog</span>
+  </div>
+  <div class="mt-10">
+    <div>
+      <h3 class="font-pixel text-xl mb-3 text-center leading-loose sm:leading-normal">{year} posts archive</h3>
+      <div class="space-y-5 divide-y divide-white/10">
+        { posts.map((p) => (
+          <article class="pt-5 first:pt-0">
+            <a href={p.url}>
+              <h3 class="text-2xl mb-2">{ p.frontmatter.title } <span class="text-xs text-white/60"> - { format(p.frontmatter.pubDate, 'dd/MM/yyyy') }</span></h3>
+              <p class="text-white/80 text-sm">{ p.frontmatter.description }</p>
+            </a>
+          </article>
+        )) }
+      </div>
+    </div>
+  </div>
+</Layout>
