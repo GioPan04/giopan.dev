@@ -6,6 +6,7 @@ interface Props {
 }
 
 const { title } = Astro.props;
+const url = Astro.url;
 ---
 
 <!doctype html>
@@ -22,6 +23,7 @@ const { title } = Astro.props;
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Press+Start+2P&display=swap" rel="stylesheet">
 		<title>{title} - giopan.dev</title>
+		<link rel="canonical" href={url} />
 	</head>
 	<body class="antialiased bg-primary font-base text-white pt-12">
 		<NavBar />
