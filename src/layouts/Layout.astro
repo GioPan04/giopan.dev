@@ -33,3 +33,14 @@ const url = Astro.url;
 		<slot name="after-main"/>
 	</body>
 </html>
+
+<script>
+	import Plausible from 'plausible-tracker';
+	const plausible = Plausible({
+		domain: 'giopan.dev',
+		trackLocalhost: false,
+		apiHost: 'https://dashboard.giopan.dev'
+	});
+
+	plausible.trackPageview();
+</script>
