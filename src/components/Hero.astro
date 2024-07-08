@@ -1,14 +1,23 @@
 ---
-import { SiGithub, SiCodepen, SiX, SiInstagram } from '@icons-pack/react-simple-icons';
-import { Mail } from 'lucide-react';
-import SocialButton from './SocialButton.astro';
+import {
+  SiGithub,
+  SiCodepen,
+  SiX,
+  SiInstagram,
+} from "@icons-pack/react-simple-icons";
+import { Mail } from "lucide-react";
+import SocialButton from "./SocialButton.astro";
 ---
 
 <div class="flex items-center text-white flex-col">
   <div class="font-pixel mt-20 mb-10">
     <span class="text-center text-2xl sm:text-left block">Hi!</span>
-    <span class="text-center text-3xl blinking-cursor block">I'm <br class="sm:hidden"/> <span class="text-secondary">Gioele Pannetto</span></span>
-    <span class="text-xs block text-center mt-2">FULLSTACK & WEB DEVELOPER</span>
+    <span class="text-center text-3xl blinking-cursor block"
+      >I'm <br class="sm:hidden" />
+      <span class="text-secondary">Gioele Pannetto</span></span
+    >
+    <span class="text-xs block text-center mt-2">FULLSTACK & WEB DEVELOPER</span
+    >
   </div>
   <div class="flex flex-wrap justify-center space-x-2">
     <SocialButton href="https://github.com/GioPan04">
@@ -20,7 +29,7 @@ import SocialButton from './SocialButton.astro';
     <SocialButton href="https://codepen.io/GioPan">
       <SiCodepen />
     </SocialButton>
-    <SocialButton href="https://x.com/giopan_sh">
+    <SocialButton href="https://x.com/giopandotdev">
       <SiX />
     </SocialButton>
     <SocialButton href="https://instagram.com/giopan.dev">
