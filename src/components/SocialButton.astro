@@ -6,7 +6,7 @@ interface Props {
 const { href } = Astro.props;
 ---
 
-<a href={href} target="_blank">
+<a href={href} rel="me" target="_blank">
   <div class="bg-white/5 p-3 rounded-md cursor-pointer transition-colors group hover:bg-white/10">
     <div class="opacity-80 group-hover:opacity-100">
       <slot />
