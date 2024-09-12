@@ -1,11 +1,11 @@
 ---
-import { format, isAfter } from 'date-fns';
-import Layout from '../../layouts/Layout.astro';
-import type IPost from '../../types/post.ts';
-import CategoryChip from '../../components/CategoryChip.astro';
-import { getPostsCategories, getPostsYears } from '../../repositories/blog';
+import { format, isAfter } from "date-fns";
+import Layout from "../../layouts/Layout.astro";
+import type IPost from "../../types/post.ts";
+import CategoryChip from "../../components/CategoryChip.astro";
+import { getPostsCategories, getPostsYears } from "../../repositories/blog";
 
-const posts = (await Astro.glob<IPost>('./posts/[!_]*.md')).reverse();
+const posts = (await Astro.glob<IPost>("./posts/[!_]*.md")).reverse();
 const tags = getPostsCategories(posts);
 const years = getPostsYears(posts);
 ---
@@ -13,55 +13,75 @@ const years = getPostsYears(posts);
 <Layout title="Blog">
   <div class="mt-10 mb-16">
     <h1 class="font-pixel text-3xl text-center mb-2">Gioele's blog</h1>
-    <span class="text-sm text-white/60 text-center block">aka: a nerd's blog</span>
+    <span class="text-sm text-white/60 text-center block"
+      >aka: a nerd's blog</span
+    >
   </div>
   <div class="lg:hidden">
     <h3 class="font-pixel text-xl mb-3">Categories</h3>
     <div class="flex -ml-1 overflow-x-auto overflow-y-hidden">
-      { Object.entries(tags).map(([t, n], _) => (
-        <a href={`/blog/tag/${t}`}>
-          <CategoryChip>
-            {t}<span class="ml-1 text-xs inline-block"> - {n}</span>
-          </CategoryChip>
-        </a>
-      )) }
+      {
+        Object.entries(tags).map(([t, n], _) => (
+          <a href={`/blog/tag/${t}`}>
+            <CategoryChip>
+              {t}
+              <span class="ml-1 text-xs inline-block"> - {n}</span>
+            </CategoryChip>
+          </a>
+        ))
+      }
     </div>
   </div>
   <div class="mt-10 lg:grid grid-cols-3">
     <div class="lg:col-span-2">
       <h3 class="font-pixel text-xl mb-3">Latest posts</h3>
       <div class="space-y-5 divide-y divide-white/10">
-        { posts.map((p) => (
-          <article class="pt-5 first:pt-0">
-            <a href={p.url}>
-              <h3 class="text-2xl mb-2">{ p.frontmatter.title } <span class="text-xs text-white/60"> - { format(p.frontmatter.pubDate, 'dd/MM/yyyy') }</span></h3>
-              <p class="text-white/80 text-sm">{ p.frontmatter.description }</p>
-            </a>
-          </article>
-        )) }
+        {
+          posts.map((p) => (
+            <article class="pt-5 first:pt-0">
+              <a href={p.url}>
+                <h3 class="text-2xl mb-2">
+                  {p.frontmatter.title}{" "}
+                  <span class="text-xs text-white/60">
+                    {" "}
+                    - {format(p.frontmatter.pubDate, "dd/MM/yyyy")}
+                  </span>
+                </h3>
+                <p class="text-white/80 text-sm">{p.frontmatter.description}</p>
+              </a>
+            </article>
+          ))
+        }
       </div>
     </div>
     <div class="lg:ml-16 space-y-5">
       <div class="hidden lg:block">
         <h3 class="font-pixel text-xl text-right mb-3">Categories</h3>
         <div class="flex flex-wrap justify-end -mr-1 -mt-2">
-          { Object.entries(tags).map(([t, n], _) => (
-            <a href={`/blog/tag/${t}`} class="mt-2">
-              <CategoryChip>
-                {t}<span class="ml-1 text-xs inline-block"> - {n}</span>
-              </CategoryChip>
-            </a>
-          )) }
+          {
+            Object.entries(tags).map(([t, n], _) => (
+              <a href={`/blog/tag/${t}`} class="mt-2">
+                <CategoryChip>
+                  {t}
+                  <span class="ml-1 text-xs inline-block"> - {n}</span>
+                </CategoryChip>
+              </a>
+            ))
+          }
         </div>
       </div>
       <div>
         <h3 class="font-pixel text-xl lg:text-right mb-3">Archive</h3>
         <ul class="lg:text-right">
-          { Object.entries(years).sort((p, n) => parseInt(n[0]) - parseInt(p[0])).map(([y, n]) => (
-            <a href={`/blog/archive/${y}`}>
-              <li class="underline">{y}</li>
-            </a>
-          )) }
+          {
+            Object.entries(years)
+              .sort((p, n) => parseInt(n[0]) - parseInt(p[0]))
+              .map(([y, n]) => (
+                <a href={`/blog/archive/${y}`}>
+                  <li class="underline">{y}</li>
+                </a>
+              ))
+          }
         </ul>
       </div>
     </div>
