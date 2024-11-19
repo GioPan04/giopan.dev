@@ -1,56 +1,79 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import TimeLine, { type IEvents } from '../components/TimeLine.astro';
-import Section from '../components/Section.astro';
-import { differenceInYears } from 'date-fns';
-import type IPost from '../types/post';
-import PostCard from '../components/PostCard.astro';
-import { ArrowRight } from 'lucide-react';
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import TimeLine, { type IEvents } from "../components/TimeLine.astro";
+import Section from "../components/Section.astro";
+import { differenceInYears } from "date-fns";
+import type IPost from "../types/post";
+import PostCard from "../components/PostCard.astro";
+import { ArrowRight } from "lucide-react";
 
-const birth = new Date(2004, 11, 30);	// 30/12/2004
+const birth = new Date(2004, 11, 30); // 30/12/2004
 const age = differenceInYears(Date.now(), birth);
 
 const events: IEvents = {
-	2018: ['Started studying IT at I.S.I.S. P. Gobetti - A. Volta. A high school in Florence, Italy.'],
-	2020: ['Started working for Insegreto, an Italian social network where you can share secrets anonymously. I worked as fullstack developer, we updated the website and we began to work on the app.'],
-	2023: ['Graduated in high school with a score of 81/100'],
-	2024: ['Started studying Computer Science at University of Florence']
-}
+  2018: [
+    "Started studying IT at I.S.I.S. P. Gobetti - A. Volta. A high school in Florence, Italy.",
+  ],
+  2020: [
+    "Started working for Insegreto, an Italian social network where you can share secrets anonymously. I worked as fullstack developer, we updated the website and we began to work on the app.",
+  ],
+  2023: ["Graduated in high school with a score of 81/100"],
+  2024: [
+    "Working as as a Linux Sysadmin in [Qboxmail](https://qboxmail.com), a mail hosting provider",
+  ],
+};
 
-const posts = (await Astro.glob<IPost>('./blog/posts/[!_]*.md')).slice(-10).reverse();
+const posts = (await Astro.glob<IPost>("./blog/posts/[!_]*.md"))
+  .slice(-10)
+  .reverse();
 ---
 
 <Layout title="Home">
-	<Hero />
-	
-	<Section class="mt-32" title="whoami">
-		<div class="flex flex-col space-y-4 sm:flex-row sm:space-x-8 sm:space-y-0 justify-center items-center">
-			<img class="w-48 h-48 sm:w-72 sm:h-72 rounded-full" src="/me.jpg" alt="My profile picture"/>
-			<p class="sm:col-span-2 text-justify">
-				Hi! I'm Gioele Pannetto, a { age } years old programming enthusiast boy.
-				I have this passion since I was 3 years old, when my father gifted me my first computer.
-				When I was 7 I developed my first Visual Basic script.
-				At the age of 10 I created my first website in HTML and CSS, and so on with other programming languages not only for the web.
-				I also created some websites for relatives and friends, and with this I realized that in addition to the passion for IT, I also have the passion for helping others.
-				I hope to help you as well! 
-			</p>
-		</div>
-	</Section>
+  <Hero />
 
-	<Section title="My timeline">
-		<TimeLine events={events} />
-	</Section>
+  <Section class="mt-32" title="whoami">
+    <div
+      class="flex flex-col space-y-4 sm:flex-row sm:space-x-8 sm:space-y-0 justify-center items-center"
+    >
+      <img
+        class="w-48 h-48 sm:w-72 sm:h-72 rounded-full"
+        src="/me.jpg"
+        alt="My profile picture"
+      />
+      <p class="sm:col-span-2 text-justify">
+        Hi! I'm Gioele Pannetto, a {age} years old programming enthusiast boy. I
+        have this passion since I was 3 years old, when my father gifted me my first
+        computer. When I was 7 I developed my first Visual Basic script. At the age
+        of 10 I created my first website in HTML and CSS, and so on with other programming
+        languages not only for the web. I also created some websites for relatives
+        and friends, and with this I realized that in addition to the passion for
+        IT, I also have the passion for helping others. I hope to help you as well!
+      </p>
+    </div>
+  </Section>
 
-	<Section title="Latest blog posts">
-		<div class="lg:columns-3 space-y-5">
-			{ posts.map((p) => <a href={p.url} class="block"><PostCard post={p.frontmatter} /></a>) }
-			<a class="block" href="/blog">
-				<div class="order-last break-inside-avoid-column bg-white/5 rounded px-3 py-8 space-y-2 flex flex-col justify-center items-center">
-					<ArrowRight />
-					<span>Read more</span>
-				</div>
-			</a>
-		</div>
-	</Section>
+  <Section title="My timeline">
+    <TimeLine events={events} />
+  </Section>
+
+  <Section title="Latest blog posts">
+    <div class="lg:columns-3 space-y-5">
+      {
+        posts.map((p) => (
+          <a href={p.url} class="block">
+            <PostCard post={p.frontmatter} />
+          </a>
+        ))
+      }
+      <a class="block" href="/blog">
+        <div
+          class="order-last break-inside-avoid-column bg-white/5 rounded px-3 py-8 space-y-2 flex flex-col justify-center items-center"
+        >
+          <ArrowRight />
+          <span>Read more</span>
+        </div>
+      </a>
+    </div>
+  </Section>
 </Layout>

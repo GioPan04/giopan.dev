@@ -1,7 +1,9 @@
 ---
+import { marked } from 'marked';
+
 export interface IEvents {
   [year: number]: string[]
-} 
+}
 
 interface Props {
   events: IEvents
@@ -18,7 +20,7 @@ const events = Object.entries(Astro.props.events);
 
       const contents = (
         <div class:list={{'timeline-event': true, "pb-16": !last}}>
-        { event.map(e => <p>{e}</p>) }
+        { event.map(e => <div class="prose prose-invert" set:html={marked.parse(e)} />) }
         </div>
       )
 
@@ -43,9 +45,9 @@ const events = Object.entries(Astro.props.events);
         {e[0]}
       </div>
       {
-        e[1].map((content: string) => (
-          <p class="text-justify">{content}</p>
-        ))
+        e[1].map((content: string) =>
+          <div class="prose prose-invert text-justify" set:html={marked.parse(content)} />
+        )
       }
     </div>
   ))
@@ -68,7 +70,7 @@ const events = Object.entries(Astro.props.events);
 </style>
 
 <script>
-  
+
   const observerCallback: IntersectionObserverCallback = (entries, observer) => {
     entries.forEach((oe) => {
       if(!oe.target.classList.contains('timeline-shown') && oe.isIntersecting) {
@@ -76,9 +78,9 @@ const events = Object.entries(Astro.props.events);
         observer.unobserve(oe.target);
       }
     });
-    
+
   }
-  
+
   const events = document.querySelectorAll<HTMLSpanElement>('.timeline-event');
   const observer = new IntersectionObserver(observerCallback, { rootMargin: '100px 0px 0px 0px' });
 
